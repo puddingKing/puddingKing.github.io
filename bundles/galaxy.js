@@ -101,17 +101,17 @@
 			ctx.font="60px Baloo Bhai";
 			ctx.fillStyle = roundsData.colors[0];
 			var textH = height/2;
-			ctx.fillText('L',width/2-100,textH);
+			ctx.fillText('H',width/2-100,textH);
 			ctx.fillStyle = roundsData.colors[1];
-			ctx.fillText('A',width/2-60,textH);
+			ctx.fillText('E',width/2-60,textH);
 			ctx.fillStyle = roundsData.colors[2];
-			ctx.fillText('K',width/2-20,textH);
+			ctx.fillText('L',width/2-20,textH);
 			ctx.fillStyle = roundsData.colors[3];
-			ctx.fillText('E',width/2+20,textH);
+			ctx.fillText('L',width/2+20,textH);
 			ctx.fillStyle = roundsData.colors[4];
-			ctx.fillText('J',width/2+60,textH);
-			ctx.fillStyle = roundsData.colors[5];
-			ctx.fillText('S',width/2+100,textH);
+			ctx.fillText('O',width/2+60,textH);
+			// ctx.fillStyle = roundsData.colors[5];
+			// ctx.fillText('S',width/2+100,textH);
 			ctx.restore();
 		}
 	}
