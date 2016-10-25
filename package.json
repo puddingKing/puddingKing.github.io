@@ -1,0 +1,25 @@
+{
+  "name": "ppk",
+  "version": "1.0.0",
+  "description": "puddingKing's website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puddingKing/puddingKing.github.io.git"
+  },
+  "keywords": [
+    "yx891015"
+  ],
+  "author": "Shane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puddingKing/puddingKing.github.io/issues"
+  },
+  "homepage": "https://github.com/puddingKing/puddingKing.github.io#readme",
+  "devDependencies": {
+    "webpack": "^1.13.2"
+  }
+}
