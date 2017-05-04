@@ -1,66 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 header{
+  position: relative;
+  width: 100%;
+  height: 300px;
+  // background: url(../images/sakura.jpg) 0 0 no-repeat;
+  // background-size: contain;
+}
+  header .header-box{
     width: 100%;
-    height: 200px;
-    color: #fff;
-    background-color: #4A708B;
-    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
-    text-align: center;
-}
-section{
-    width: 960px;
-    height: 100%;
-}
-.header {
-    line-height: 200px;
-    position: relative;
-    min-width: 500px;
-}
-.box {
-    display: inline-block;
-    width: 500px;
-    height: 50px;
-    overflow: hidden;
-    vertical-align: middle;
-    cursor: pointer;
-}
-#title {
-    /*transition: all 1s;*/
-    transform: translateY(0px);
-    animation: titleAnim 10s linear infinite;
-}
-.title{
-    display: block;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    font-size: 40px;
-}
-.title.title--smaller{
-    position: absolute;
-    width: 500px;
-    bottom: 10px;
-    left: 230px;
-    font-size: 20px;
-}
-@media screen and (max-width: 960px){
-    section{
-        width: 100%;
-    }
-    .title.title--smaller{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 18px;
-    }
-}
-@keyframes titleAnim{
-    0% {transform: translateY(0);}
-    10% {transform: translateY(-50px);}
-    25% {transform: translateY(-50px);}
-    35% {transform: translateY(-100px);}
-    50% {transform: translateY(-100px);}
-    60% {transform: translateY(-50px);}
-    75% {transform: translateY(-50px);}
-    85% {transform: translateY(0);}
-    100% {transform: translateY(0);}
-}
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
