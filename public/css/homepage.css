@@ -16,9 +16,7 @@ header{
   }
 .slogan{
   position: relative;
-  width: 500px;
-  text-align: left;
-  margin-top: -100px;
-  margin-left: 61.8px;
+  width: 430px;
+  margin: -100px auto 0 auto;
   cursor: pointer;
 }

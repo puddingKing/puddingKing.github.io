@@ -277,7 +277,7 @@
 /***/ function(module, exports) {
 
 	var data = {
-	  max: 40,
+	  max: 50,
 	  distance: 80,
 	  numerators: [],
 	  speed: 0.2 // (0, ~)
