@@ -4,6 +4,7 @@
   "description": "puddingKing's website",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,7 +12,7 @@
     "url": "git+https://github.com/puddingKing/puddingKing.github.io.git"
   },
   "keywords": [
-    "yx891015"
+    ""
   ],
   "author": "Shane",
   "license": "ISC",
@@ -20,6 +21,10 @@
   },
   "homepage": "https://github.com/puddingKing/puddingKing.github.io#readme",
   "devDependencies": {
+    "autoprefixer": "^7.1.5",
+    "css-loader": "^0.28.7",
+    "postcss-loader": "^2.0.7",
+    "style-loader": "^0.19.0",
     "webpack": "^1.13.2"
   }
 }

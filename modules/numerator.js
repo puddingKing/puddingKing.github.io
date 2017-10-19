@@ -2,7 +2,7 @@ var numerator = {
   born: function (x, y, r, water) {
     var ctx = water.getContext('2d')
     ctx.save()
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = '#fff'
     ctx.beginPath()
     ctx.arc(x, y, r, 0, Math.PI*2)
     ctx.closePath()

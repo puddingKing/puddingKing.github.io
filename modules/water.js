@@ -85,9 +85,9 @@ water.prototype.flow = function (water) {
   numerators.link(ctx)
 }
 
-water.prototype.add = function (num, water) {
-  var width = water.width
-  var height = water.height
+water.prototype.add = function (num) {
+  var width = this.width
+  var height = this.height
   for (var i = 0; i < num; i++) {
     var x = Math.random() * width
     var y = Math.random() * height

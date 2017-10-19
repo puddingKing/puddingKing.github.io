@@ -1,5 +1,5 @@
 var data = {
-  max: 50,
+  max: 88,
   distance: 80,
   numerators: [],
   speed: 0.2 // (0, ~)
