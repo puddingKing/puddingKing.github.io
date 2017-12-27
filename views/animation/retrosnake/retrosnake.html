@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retro Snake Game</title>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+  <style type="text/css">
+  *{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Black Ops One', cursive;
+  }
+  .wrap{
+    width: 500px;
+    margin: 100px auto;
+  }
+  #over{
+    position: relative;
+    text-align: center;
+    color: #fff;
+    margin-top: -400px;
+  }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <canvas id="FoodField" width="500px" height="500px"></canvas>
+    <div id="over" style="display: none;">Game over</div>
+    <div id="score">score：0</div>
+  </div>
+  
+  <script type="text/javascript" src="/bundle/retrosnake.js"></script>
+</body>
+</html>

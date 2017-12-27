@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scroller - 滚动条</title>
+  <style>
+    .scroller-box{
+      position: relative;
+      width: 500px;
+      height: 400px;
+      padding: 0 20px;
+      background-color: #000;
+      overflow: hidden;
+    }
+    .scroller-content{
+      width: 100%;
+      background-color: #1da2ff;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="scroller-box" id="scroller-box">
+    <div class="scroller-content" id="scroller-content">
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+      <p>5</p>
+      <p>6</p>
+      <p>7</p>
+      <p>8</p>
+      <p>9</p>
+      <p>10</p>
+      <p>11</p>
+      <p>12</p>
+      <p>13</p>
+      <p>14</p>
+      <p>15</p>
+      <p>16</p>
+      <p>17</p>
+    </div>
+<!--     <div class="scroller-bar"></div> -->
+  </div>
+  <p>支持chrome,firefox,ie6+</p>
+  <p>不支持safari</p>
+  <script type="text/javascript" src="../../../modules/tools/useragent.js"></script>
+  <script src="../../../modules/components/scroller.js"></script>
+  <script>
+    var _scroller = new Scroller({
+      outer: client.browser.ie >= 8 ? document.querySelector('.scroller-box') : document.getElementById('scroller-box'),
+      inner: client.browser.ie >= 8 ? document.querySelector('.scroller-content') : document.getElementById('scroller-content'),
+      speed: 2
+    })
+    _scroller.on('wheel', function (obj) {
+      console.log(obj.delta)
+    })
+  </script>
+</body>
+</html>

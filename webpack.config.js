@@ -6,6 +6,7 @@ module.exports = {
   //页面入口文件配置
   entry: {
     homepage: './dev/homepage.js', //手机分时图
+    retrosnake: './modules/animations/retrosnake/index.js'
   },
   output: {
     filename: './bundle/[name].js'

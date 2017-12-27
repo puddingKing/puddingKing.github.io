@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1)
 	var WATER = __webpack_require__(6)
@@ -52,13 +52,7 @@
 	// 初始化分子
 	if (water) {
 	  var w = new WATER(water)
-	  w.init(water)
-	  // 分子运动
-	  var watering = window.requestAnimationFrame(timer)
-	  function timer () {
-	    w.flow(water)
-	    watering = window.requestAnimationFrame(timer)
-	  }
+	  
 	  document.querySelector('#water').addEventListener('click', function (e) {
 	    var x = e.clientX - water.offsetLeft
 	    var y = e.clientY - water.offsetTop
@@ -66,13 +60,14 @@
 	  })
 	  window.addEventListener('resize', function () {
 	    water.width = document.documentElement.clientWidth
+	    w.update(water)
 	  })
 	}
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
@@ -101,9 +96,9 @@
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)(undefined);
 	// imports
@@ -115,9 +110,9 @@
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -197,9 +192,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -569,9 +564,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	
 	/**
@@ -664,27 +659,35 @@
 	};
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var numerator = __webpack_require__(7)
 	var numerators = __webpack_require__(8)
 	var data = __webpack_require__(9)
 	
-	var water = function (water) {
+	var WATEROBJ = function (water) {
 	  this.width = water.width
 	  this.height = water.height
 	  this.canvas = water
-	  this.ctx = water.getContext('2d')
+	  this.watering = ''
+	  this.init()
+	  this.flow()
 	}
 	
-	water.prototype.init = function (water) {
+	WATEROBJ.prototype.update = function (water) {
+	  this.width = water.width
+	  this.height = water.height
+	  this.canvas = water
+	}
+	
+	WATEROBJ.prototype.init = function () {
 	  console.log('water.init begin:')
-	  var water = water
+	  var water = this.canvas
 	  var ctx = water.getContext('2d')
-	  var width = water.width
-	  var height = water.height
+	  var width = this.width
+	  var height = this.height
 	  ctx.clearRect(0, 0, width, height)
 	  for (var i = 0; i < data.max; i++) {
 	    var x = Math.random() * width
@@ -711,11 +714,12 @@
 	  numerators.link(ctx)
 	}
 	
-	water.prototype.flow = function (water) {
-	  var water = water
+	WATEROBJ.prototype.flowFrame = function () {
+	  var _this = this
+	  var water = _this.canvas
 	  var ctx = water.getContext('2d')
-	  var width = water.width
-	  var height = water.height
+	  var width = _this.width
+	  var height = _this.height
 	  ctx.clearRect(0, 0, width, height)
 	  // ctx.fillStyle = '#3b6caa'
 	  // ctx.fillRect(0, 0, width, height)
@@ -755,7 +759,15 @@
 	  numerators.link(ctx)
 	}
 	
-	water.prototype.add = function (num) {
+	WATEROBJ.prototype.flow = function () {
+	  var _this = this
+	  _this.flowFrame()
+	  _this.watering = window.requestAnimationFrame(function(){
+	    _this.flow()
+	  })
+	}
+	
+	WATEROBJ.prototype.add = function (num) {
 	  var width = this.width
 	  var height = this.height
 	  for (var i = 0; i < num; i++) {
@@ -780,7 +792,7 @@
 	  }
 	}
 	
-	water.prototype.addOne = function (x, y) {
+	WATEROBJ.prototype.addOne = function (x, y) {
 	  var r = Math.random() * 2 + 1
 	  if (Math.random() < 0.25) {
 	    var dir = 1
@@ -799,19 +811,19 @@
 	  })
 	}
 	
-	water.prototype.lower = function (num, water) {
+	WATEROBJ.prototype.lower = function (num, water) {
 	  data.numerators.splice(0, num)
 	}
 	
-	water.prototype.change = function () {
+	WATEROBJ.prototype.change = function () {
 	  
 	}
 	
-	module.exports = water
+	module.exports = WATEROBJ
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	var numerator = {
 	  born: function (x, y, r, water) {
@@ -828,9 +840,9 @@
 	
 	module.exports = numerator
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var data = __webpack_require__(9)
 	
@@ -866,9 +878,9 @@
 	
 	module.exports = numerators
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	var data = {
 	  max: 88,
@@ -879,6 +891,6 @@
 	
 	module.exports = data
 
-/***/ }
+/***/ })
 /******/ ]);
 //# sourceMappingURL=homepage.js.map
