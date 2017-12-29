@@ -45,24 +45,24 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1)
-	var WATER = __webpack_require__(6)
-	// 获取画布
-	var water = document.querySelector('#water')
-	water.width = document.documentElement.clientWidth
-	// 初始化分子
-	if (water) {
-	  var w = new WATER(water)
+	// var WATER = require('../modules/animations/numerators/water.js')
+	// // 获取画布
+	// var water = document.querySelector('#water')
+	// water.width = document.documentElement.clientWidth
+	// // 初始化分子
+	// if (water) {
+	//   var w = new WATER(water)
 	  
-	  document.querySelector('#water').addEventListener('click', function (e) {
-	    var x = e.clientX - water.offsetLeft
-	    var y = e.clientY - water.offsetTop
-	    w.addOne(x, y)
-	  })
-	  window.addEventListener('resize', function () {
-	    water.width = document.documentElement.clientWidth
-	    w.update(water)
-	  })
-	}
+	//   document.querySelector('#water').addEventListener('click', function (e) {
+	//     var x = e.clientX - water.offsetLeft
+	//     var y = e.clientY - water.offsetTop
+	//     w.addOne(x, y)
+	//   })
+	//   window.addEventListener('resize', function () {
+	//     water.width = document.documentElement.clientWidth
+	//     w.update(water)
+	//   })
+	// }
 
 
 /***/ }),
@@ -105,7 +105,7 @@
 	
 	
 	// module
-	exports.push([module.id, "*{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n.fl{\r\n  float: left;\r\n}\r\n.page{\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n  background: -webkit-gradient(linear, left bottom, left top, from(#75d5e1), to(#8ed9de));\r\n  background: linear-gradient(to top, #75d5e1, #8ed9de);\r\n  background-color: #8ed9de;\r\n}\r\nheader{\r\n  position: relative;\r\n  width: 100%;\r\n  height: 200px;\r\n}\r\n  header .header-box{\r\n    width: 1024px;\r\n    height: 200px;\r\n    margin: 0 auto;\r\n  }\r\n#water{\r\n  position: absolute;\r\n  margin-top: 40px;\r\n}\r\n.content{\r\n  position: relative;\r\n  width: 1024px;\r\n  min-height: 760px;\r\n  margin: 40px auto 0 auto;\r\n}\r\n.content .sidebar{\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  width: 320px;\r\n  height: 760px;\r\n  background: rgba(22,93,99,0.8);\r\n}\r\n.content .main{\r\n  width: 704px;\r\n  height: 760px;\r\n  background: rgba(32,49,59,0.8);\r\n}\r\n", ""]);
+	exports.push([module.id, "*{\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: \"PingFang SC\", \"Helvetica Neue\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"\\5FAE\\8F6F\\96C5\\9ED1\", Helvetica, Arial, Verdana, sans-serif;\r\n}\r\n.fl{\r\n  float: left;\r\n}\r\n.fr{\r\n  float: right;\r\n}\r\n.line{\r\n  width: 30px;\r\n  height: 1px;\r\n  background-color: #5796a7;\r\n  margin: 10px auto;\r\n}\r\n.page{\r\n  overflow: hidden;\r\n}\r\n.wrapper{\r\n  position: relative;\r\n  width: 980px;\r\n  margin: 0 auto;\r\n}\r\n.top{\r\n  text-align: center;\r\n}\r\n.pagetit{\r\n  font-size: 22px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.middle{\r\n  margin-top: 50px;\r\n}\r\n.menu{\r\n  width: 10%;\r\n  list-style: none;\r\n}\r\n.menu li{\r\n  margin: 12px 5px;\r\n  cursor: pointer;\r\n}\r\n.menu li:hover{\r\n  margin: 12px 5px;\r\n  cursor: pointer;\r\n  color: #5796a7;\r\n}\r\n.menu li::before{\r\n  content: '';\r\n  display: inline-block;\r\n  width: 3px;\r\n  height: 12px;\r\n  background-color: #5796a7;\r\n  margin-right: 6px;\r\n}", ""]);
 	
 	// exports
 
@@ -658,238 +658,6 @@
 		return fixedCss;
 	};
 
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var numerator = __webpack_require__(7)
-	var numerators = __webpack_require__(8)
-	var data = __webpack_require__(9)
-	
-	var WATEROBJ = function (water) {
-	  this.width = water.width
-	  this.height = water.height
-	  this.canvas = water
-	  this.watering = ''
-	  this.init()
-	  this.flow()
-	}
-	
-	WATEROBJ.prototype.update = function (water) {
-	  this.width = water.width
-	  this.height = water.height
-	  this.canvas = water
-	}
-	
-	WATEROBJ.prototype.init = function () {
-	  console.log('water.init begin:')
-	  var water = this.canvas
-	  var ctx = water.getContext('2d')
-	  var width = this.width
-	  var height = this.height
-	  ctx.clearRect(0, 0, width, height)
-	  for (var i = 0; i < data.max; i++) {
-	    var x = Math.random() * width
-	    var y = Math.random() * height
-	    var r = Math.random() * 2 + 1
-	    if (Math.random() < 0.25) {
-	      var dir = 1
-	    } else if (0.25 <= Math.random() < 0.5) {
-	      var dir = 2
-	    } else if (0.5 <= Math.random() < 0.75) {
-	      var dir = 3
-	    } else {
-	      var dir = 4
-	    }
-	
-	    data.numerators.push({
-	      x: x,
-	      y: y,
-	      dir: dir,
-	      r: r
-	    })
-	    numerator.born(x, y, r, water)
-	  }
-	  numerators.link(ctx)
-	}
-	
-	WATEROBJ.prototype.flowFrame = function () {
-	  var _this = this
-	  var water = _this.canvas
-	  var ctx = water.getContext('2d')
-	  var width = _this.width
-	  var height = _this.height
-	  ctx.clearRect(0, 0, width, height)
-	  // ctx.fillStyle = '#3b6caa'
-	  // ctx.fillRect(0, 0, width, height)
-	  for (var i = 0; i < data.numerators.length; i ++) {
-	    switch (data.numerators[i].dir) {
-	      case 1:
-	        data.numerators[i].x = data.numerators[i].x + data.speed
-	        data.numerators[i].y = data.numerators[i].y + data.speed
-	        if (data.numerators[i].x < 0 || data.numerators[i].y < 0 || data.numerators[i].x > width || data.numerators[i].y > height) {
-	          data.numerators[i].dir = 2
-	        }
-	        break
-	      case 2:
-	        data.numerators[i].x = data.numerators[i].x + data.speed
-	        data.numerators[i].y = data.numerators[i].y - data.speed
-	        if (data.numerators[i].x < 0 || data.numerators[i].y < 0 || data.numerators[i].x > width || data.numerators[i].y > height) {
-	          data.numerators[i].dir = 3
-	        }
-	        break
-	      case 3:
-	        data.numerators[i].x = data.numerators[i].x - data.speed
-	        data.numerators[i].y = data.numerators[i].y - data.speed
-	        if (data.numerators[i].x < 0 || data.numerators[i].y < 0 || data.numerators[i].x > width || data.numerators[i].y > height) {
-	          data.numerators[i].dir = 4
-	        }
-	        break
-	      case 4:
-	        data.numerators[i].x = data.numerators[i].x - data.speed
-	        data.numerators[i].y = data.numerators[i].y + data.speed
-	        if (data.numerators[i].x < 0 || data.numerators[i].y < 0 || data.numerators[i].x > width || data.numerators[i].y > height) {
-	          data.numerators[i].dir = 1
-	        }
-	        break
-	    }
-	    numerator.born(data.numerators[i].x, data.numerators[i].y, data.numerators[i].r, water)
-	  }
-	  numerators.link(ctx)
-	}
-	
-	WATEROBJ.prototype.flow = function () {
-	  var _this = this
-	  _this.flowFrame()
-	  _this.watering = window.requestAnimationFrame(function(){
-	    _this.flow()
-	  })
-	}
-	
-	WATEROBJ.prototype.add = function (num) {
-	  var width = this.width
-	  var height = this.height
-	  for (var i = 0; i < num; i++) {
-	    var x = Math.random() * width
-	    var y = Math.random() * height
-	    var r = Math.random() * 2 + 1
-	    if (Math.random() < 0.25) {
-	      var dir = 1
-	    } else if (0.25 <= Math.random() < 0.5) {
-	      var dir = 2
-	    } else if (0.5 <= Math.random() < 0.75) {
-	      var dir = 3
-	    } else {
-	      var dir = 4
-	    }
-	    data.numerators.push({
-	      x: x,
-	      y: y,
-	      dir: dir,
-	      r: r
-	    })
-	  }
-	}
-	
-	WATEROBJ.prototype.addOne = function (x, y) {
-	  var r = Math.random() * 2 + 1
-	  if (Math.random() < 0.25) {
-	    var dir = 1
-	  } else if (0.25 <= Math.random() < 0.5) {
-	    var dir = 2
-	  } else if (0.5 <= Math.random() < 0.75) {
-	    var dir = 3
-	  } else {
-	    var dir = 4
-	  }
-	  data.numerators.push({
-	    x: x,
-	    y: y,
-	    dir: dir,
-	    r: r
-	  })
-	}
-	
-	WATEROBJ.prototype.lower = function (num, water) {
-	  data.numerators.splice(0, num)
-	}
-	
-	WATEROBJ.prototype.change = function () {
-	  
-	}
-	
-	module.exports = WATEROBJ
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-	var numerator = {
-	  born: function (x, y, r, water) {
-	    var ctx = water.getContext('2d')
-	    ctx.save()
-	    ctx.fillStyle = '#fff'
-	    ctx.beginPath()
-	    ctx.arc(x, y, r, 0, Math.PI*2)
-	    ctx.closePath()
-	    ctx.fill()
-	    ctx.restore()
-	  }
-	}
-	
-	module.exports = numerator
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var data = __webpack_require__(9)
-	
-	var numerators = {
-	  link: function (ctx) {
-	    for (var i = 0; i < data.numerators.length; i++) {
-	      var a = {
-	        x: data.numerators[i].x,
-	        y: data.numerators[i].y
-	      }
-	      for (var j = 0; j < data.numerators.length; j++) {
-	        var b = {
-	          x: data.numerators[j].x,
-	          y: data.numerators[j].y
-	        }
-	        var deltaX = Math.abs(a.x - b.x)
-	        var deltaY = Math.abs(a.y - b.y)
-	        var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
-	        if (distance <= data.distance) {
-	          ctx.save()
-	          ctx.beginPath()
-	          ctx.globalAlpha = 0.5*(data.distance - distance) / (data.distance)
-	          ctx.strokeStyle = '#fff'
-	          ctx.moveTo(a.x, a.y)
-	          ctx.lineTo(b.x, b.y)
-	          ctx.stroke()
-	          ctx.restore()
-	        }
-	      }
-	    }
-	  }
-	}
-	
-	module.exports = numerators
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-	var data = {
-	  max: 88,
-	  distance: 80,
-	  numerators: [],
-	  speed: 0.2 // (0, ~)
-	}
-	
-	module.exports = data
 
 /***/ })
 /******/ ]);

@@ -4,29 +4,39 @@ var path = require('path');
 
 module.exports = {
   //页面入口文件配置
-  entry: {
-    homepage: './dev/homepage.js', //手机分时图
-    retrosnake: './modules/animations/retrosnake/index.js'
-  },
+  entry: './main.js',
   output: {
-    filename: './bundle/[name].js'
+    path: '/',
+    filename: './bundle/index.js',
+    chunkFilename: '[name].[chunkhash:5].chunk.js'
+  },
+  devServer: {
+    inline: true,
+    port: 8080
   },
   module: //加载器配置
   {
     loaders: [
       {
-       test: /\.css$/,
-       loaders:['style-loader','css-loader','postcss-loader']
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'latest']
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', {
+            loader: 'postcss-loader',
+            options: {
+                plugins: [
+                    require("autoprefixer")({browserslist: ["last 2 versions"]})
+                ]
+            }
+        }]
       }
-    ],
-    postcss:[autoprefixer({browsers:['last 2 versions']})]
+    ]
   },
-  devtool: 'source-map',
-  resolve: { //解决方案配置
-    root: [
-      path.resolve('./modules/')
-    ],
-    alias: { //模块简称
-    }
-  }
+  devtool: 'source-map'
 };
