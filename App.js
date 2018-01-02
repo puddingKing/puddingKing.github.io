@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './public/css/homepage.css';
+import './public/css/main.css';
 // import { browserHistory } from 'react-router';
 import { createHashHistory } from 'history'
 
@@ -31,7 +31,7 @@ class App extends React.Component {
           </div>
           <div className="wrapper middle">
             <Menu list={links}></Menu>
-            <div className="content fr">
+            <div className="content">
               { this.props.children }
             </div>
           </div>

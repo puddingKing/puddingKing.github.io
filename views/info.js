@@ -2,7 +2,7 @@ import React from 'react';
 
 class Info extends React.Component {
     render () {
-        return <div>Personality Info</div>
+        return <div>Personal Info</div>
     }
 }
 

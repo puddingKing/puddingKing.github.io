@@ -43,6 +43,15 @@ a{
   width: 10%;
   list-style: none;
 }
+@media screen and (max-width: 840px) {
+  .middle{
+    margin-top: 10px;
+  }
+  .menu{
+    width: 100%;
+    text-align: center;
+  }
+}
 .menu li{
   margin: 12px 5px;
   cursor: pointer;
@@ -62,8 +71,23 @@ a{
   background-color: #5796a7;
   margin-right: 6px;
 }
-
-.content{
-  width: 80%;
-  padding-top: 12px;
+/* web */
+@media screen and (min-width: 840px) {
+  .content{
+    position: relative;
+    width: 80%;
+    padding-top: 12px;
+    float: right;
+    overflow: hidden;
+  }
+}
+/* mobile */
+@media screen and (max-width: 840px) {
+  .content{
+    position: relative;
+    width: 100%;
+    padding-top: 12px;
+    padding-left: 10px;
+    overflow: hidden;
+  }
 }
