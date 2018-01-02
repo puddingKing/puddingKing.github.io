@@ -28,12 +28,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', {
-            loader: 'postcss-loader',
-            options: {
-                plugins: [
-                    require("autoprefixer")({browserslist: ["last 2 versions"]})
-                ]
-            }
+          loader: 'postcss-loader',
+          options: {
+            plugins: [
+              require("autoprefixer")({browserslist: ["last 2 versions"]})
+            ]
+          }
         }]
       }
     ]
