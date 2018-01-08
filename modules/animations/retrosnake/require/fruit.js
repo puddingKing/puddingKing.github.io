@@ -2,8 +2,8 @@ function fruit (ctx) {
   this.ctx = ctx;
   this.width = ctx.canvas.width;
   this.height = ctx.canvas.height;
-  this.x = Math.floor(Math.random() * (this.width/10-1));
-  this.y = Math.floor(Math.random() * (this.width/10-1));
+  this.x = Math.floor(Math.random() * 49);
+  this.y = Math.floor(Math.random() * 49);
 }
 
 fruit.prototype.init = function () {
@@ -22,5 +22,4 @@ fruit.prototype.update = function () {
   this.y = Math.floor(Math.random() * 49);
 }
 
-// module.exports = fruit;
-export default fruit;
+module.exports = fruit;

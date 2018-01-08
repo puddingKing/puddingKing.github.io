@@ -9,6 +9,7 @@ import { HashRouter, Route } from 'react-router-dom';
 ReactDOM.render((
     <HashRouter>
         <App>
+            <Route exact path="/" component={Info} />
             <Route path="/info" component={Info} />
             <Route path="/shows" component={Shows} />      
         </App>

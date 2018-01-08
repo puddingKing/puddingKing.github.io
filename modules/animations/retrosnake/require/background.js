@@ -7,5 +7,4 @@ function bG (ctx) {
   ctx.fillRect(0,0,w,h);
   ctx.restore();
 }
-// module.exports = bG;
-export default bG;
+module.exports = bG;

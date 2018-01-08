@@ -1,11 +1,7 @@
-// var DrawBG = require('./background.js');
-// var Fruit = require("./fruit.js");
-// var Score = require("./score.js");
-// var RetroSnake = require('./retrosnake.js');
-import DrawBG from './background.js';
-import Fruit from './fruit.js';
-import Score from './score.js';
-import RetroSnake from './retrosnake.js';
+var DrawBG = require('./background.js');
+var Fruit = require("./fruit.js");
+var Score = require("./score.js");
+var RetroSnake = require('./retrosnake.js');
 
 function gameObj (opts) {
   var _this = this;
@@ -116,5 +112,4 @@ function hitSelf (retrosnake) {
   return hitself;
 }
 
-// module.exports = gameObj;
-export default gameObj;
+module.exports = gameObj;

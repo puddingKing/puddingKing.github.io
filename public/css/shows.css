@@ -65,7 +65,6 @@
   background: rgba(0,0,0,.5);
   text-align: center;
   vertical-align: middle;
-  display: none;
 }
 .layer-content {
   position: relative;
@@ -80,9 +79,26 @@
 }
 .show-box{
   display: inline-block;
-  width: 362px;
   background-color: #fff;
   vertical-align: middle;
   padding: 20px 30px;
   border-radius: 8px;
 }
+.showmask-enter {
+  opacity: 0.01;
+}
+
+.showmask-enter.showmask-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.showmask-leave {
+  opacity: 1;
+}
+
+.showmask-leave.showmask-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+

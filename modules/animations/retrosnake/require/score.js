@@ -7,5 +7,4 @@ Score.prototype.goal = function () {
   this.score += this.step
 }
 
-// module.exports = Score;
-export default Score;
+module.exports = Score;

@@ -25,8 +25,8 @@ var _retroSnake = (function () {
   }
   retroSnake.prototype.init = function () {
     var ctx = this.ctx;
-    this.head = {x:(this.width/10/2-1),y:(this.height/10/2-1)};
-    this.body = [{x:(this.width/10/2),y:(this.height/10/2-1)}];
+    this.head = {x:24,y:24};
+    this.body = [{x:25,y:24}];
     this.dir = 0;
     ctx.save();
     ctx.fillStyle = "#7CCD7C";
@@ -110,5 +110,4 @@ var _retroSnake = (function () {
   return retroSnake;
 })();
 
-// module.exports = _retroSnake;
-export default _retroSnake;
+module.exports = _retroSnake;
