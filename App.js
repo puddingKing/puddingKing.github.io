@@ -26,7 +26,7 @@ class App extends React.Component {
       <div>
         <div className="page">
           <div className="wrapper top">
-            <header className="pagetit">Shane's HomePage</header>
+            <header className="pagetit">Shane HomePage</header>
             <div className="line"></div>
           </div>
           <div className="wrapper middle">
