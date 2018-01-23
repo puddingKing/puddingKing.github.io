@@ -11,7 +11,7 @@ module.exports = {
     chunkFilename: '[name].[chunkhash:5].chunk.js'
   },
   devServer: {
-    inline: true,
+    inline: false,
     port: 8080
   },
   module: //加载器配置
