@@ -12208,15 +12208,15 @@
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
   
   _reactDom2.default.render(_react2.default.createElement(
-      _reactRouterDom.HashRouter,
+    _reactRouterDom.HashRouter,
+    null,
+    _react2.default.createElement(
+      _App2.default,
       null,
-      _react2.default.createElement(
-          _App2.default,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _info2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/info', component: _info2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/shows', component: _shows2.default })
-      )
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _info2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/info', component: _info2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/shows', component: _shows2.default })
+    )
   ), document.getElementById('app'));
   
   /***/ }),
@@ -33467,7 +33467,7 @@
   
   
   Object.defineProperty(exports, "__esModule", {
-      value: true
+    value: true
   });
   
   var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -33485,26 +33485,26 @@
   function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
   
   var Info = function (_React$Component) {
-      _inherits(Info, _React$Component);
+    _inherits(Info, _React$Component);
   
-      function Info() {
-          _classCallCheck(this, Info);
+    function Info() {
+      _classCallCheck(this, Info);
   
-          return _possibleConstructorReturn(this, (Info.__proto__ || Object.getPrototypeOf(Info)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (Info.__proto__ || Object.getPrototypeOf(Info)).apply(this, arguments));
+    }
+  
+    _createClass(Info, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Personal Info'
+        );
       }
+    }]);
   
-      _createClass(Info, [{
-          key: 'render',
-          value: function render() {
-              return _react2.default.createElement(
-                  'div',
-                  null,
-                  'Personal Info'
-              );
-          }
-      }]);
-  
-      return Info;
+    return Info;
   }(_react2.default.Component);
   
   exports.default = Info;
@@ -33685,39 +33685,80 @@
     function ShowBox() {
       _classCallCheck(this, ShowBox);
   
-      return _possibleConstructorReturn(this, (ShowBox.__proto__ || Object.getPrototypeOf(ShowBox)).call(this));
+      var _this2 = _possibleConstructorReturn(this, (ShowBox.__proto__ || Object.getPrototypeOf(ShowBox)).call(this));
+  
+      _this2.state = {
+        isPlaying: false,
+        score: 0,
+        game: ''
+      };
+      return _this2;
     }
   
     _createClass(ShowBox, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
+        var _this = this;
         console.log('did mounted');
         console.log(document.getElementById('foodfield'));
         var _game = new _app2.default({
           el: 'foodfield'
         });
-        _game.run();
+        _this.setState({
+          game: _game
+        });
+        // _game.run()
+  
+        _game.on('goal', function (data) {
+          _this.setState({
+            score: data
+          });
+        });
+        _game.on('pause', function () {
+          console.log('pause...');
+          _this.setState({ isPlaying: false });
+        });
+        _game.on('playing', function () {
+          _this.setState({ isPlaying: true });
+        });
         _game.on('ended', function () {
           console.log('Game Over.');
-          // document.getElementById("over").style.display = "block";
-        });
-        _game.on('goal', function (data) {
-          console.log('score:' + data);
-          // document.getElementById("score").innerHTML = "score：" + data
-        });
-        _game.on('pause', function (data) {
-          console.log('Game Paused.');
         });
       }
     }, {
       key: 'render',
       value: function render() {
+        var _this3 = this;
+  
         return _react2.default.createElement(
           'div',
           { className: 'show-box', onClick: function onClick(e) {
               e.stopPropagation();
             } },
-          _react2.default.createElement('canvas', { id: 'foodfield', width: '500', height: '500' })
+          _react2.default.createElement(
+            'p',
+            { className: 'score' },
+            'score: ',
+            this.state.score
+          ),
+          _react2.default.createElement('canvas', { id: 'foodfield', width: '500', height: '500' }),
+          !this.state.isPlaying ? _react2.default.createElement(
+            'div',
+            { className: 'btn-run-box' },
+            _react2.default.createElement('img', { className: 'btn-run', src: '../public/images/btn_play.png', onClick: function onClick(e) {
+                _this3.state.game.play(), _this3.setState({ isPlaying: true });
+              } })
+          ) : '',
+          _react2.default.createElement(
+            'p',
+            { className: 'game-tip' },
+            '\u4E0A\u4E0B\u5DE6\u53F3\u63A7\u5236\u65B9\u5411'
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'game-tip' },
+            '\u7A7A\u683C\u952E\u6682\u505C/\u5F00\u59CB'
+          )
         );
       }
     }]);
@@ -33756,10 +33797,6 @@
   
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
   
-  // var DrawBG = require('./background.js');
-  // var Fruit = require("./fruit.js");
-  // var Score = require("./score.js");
-  // var RetroSnake = require('./retrosnake.js');
   function gameObj(opts) {
     var _this = this;
     _this.isPause = false;
@@ -33794,7 +33831,8 @@
     _this.fire = {
       ended: '',
       goal: '',
-      pause: ''
+      pause: '',
+      playing: ''
     };
   
     document.onkeydown = function (event) {
@@ -33824,6 +33862,13 @@
     };
   }
   
+  gameObj.prototype.play = function () {
+    // 触发播放
+    var _this = this;
+    _this.isPause = false;
+    _this.run();
+  };
+  
   gameObj.prototype.run = function () {
     var _this = this;
     !_this.isPause ? _this.frame() : '';
@@ -33841,6 +33886,7 @@
       _this.fruit.update();
       _this.retrosnake.grow();
     }
+    _this.fire.playing();
   };
   
   gameObj.prototype.on = function (type, func) {
@@ -33858,6 +33904,9 @@
       case 'pause':
         // 暂停：
         _this.fire.pause = typeof func == 'function' ? func : '';
+        break;
+      case 'playing':
+        _this.fire.playing = typeof func == 'function' ? func : '';
         break;
       default:
         break;
@@ -35112,7 +35161,7 @@
   
   
   // module
-  exports.push([module.i, "\r\n.item-box:nth-child(odd) {\r\n  float: left;\r\n}\r\n.item-box:nth-child(even) {\r\n  float: right;\r\n}\r\n@media screen and (min-width: 840px) {\r\n  .item-box{\r\n    position: relative;\r\n    width: 45%;\r\n    margin: 0 10px 20px 10px;\r\n    text-align: center;\r\n    -webkit-box-shadow: 0px 5px 5px rgba(94, 85, 85, 0.384);\r\n            box-shadow: 0px 5px 5px rgba(94, 85, 85, 0.384);\r\n  }\r\n}\r\n@media screen and (max-width: 840px) {\r\n  .item-box{\r\n    position: relative;\r\n    width: 100%;\r\n    margin: 10px 0 10px 0px;\r\n  }\r\n}\r\n.item-fire{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n.project-item{\r\n  position: relative;\r\n  width: 100%;\r\n  height: 140px;\r\n  background-color: #5796a7;\r\n  color: #fff;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;  \r\n  cursor: pointer;\r\n  overflow: hidden;\r\n}\r\n.project-item img{\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n  -webkit-transition: all 0.8s;\r\n  transition: all 0.8s;\r\n}\r\n.project-item img:hover{\r\n  -webkit-transform: scale(1.2);\r\n          transform: scale(1.2);\r\n}\r\n.project-info{\r\n  width: 100%;\r\n  min-height: 50px;\r\n  background-color: #6db6c9;\r\n  color: #fff;\r\n  cursor: pointer;\r\n}\r\n\r\n.show-mask{\r\n  position: fixed;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  background: rgba(0,0,0,.5);\r\n  text-align: center;\r\n  vertical-align: middle;\r\n}\r\n.layer-content {\r\n  position: relative;\r\n  display: table;\r\n  height: 100%;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n}\r\n.layer-box{\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n}\r\n.show-box{\r\n  display: inline-block;\r\n  background-color: #fff;\r\n  vertical-align: middle;\r\n  padding: 20px 30px;\r\n  border-radius: 8px;\r\n}\r\n.showmask-enter {\r\n  opacity: 0.01;\r\n}\r\n\r\n.showmask-enter.showmask-enter-active {\r\n  opacity: 1;\r\n  -webkit-transition: opacity 300ms ease-in;\r\n  transition: opacity 300ms ease-in;\r\n}\r\n\r\n.showmask-leave {\r\n  opacity: 1;\r\n}\r\n\r\n.showmask-leave.showmask-leave-active {\r\n  opacity: 0.01;\r\n  -webkit-transition: opacity 300ms ease-in;\r\n  transition: opacity 300ms ease-in;\r\n}\r\n\r\n", ""]);
+  exports.push([module.i, "\r\n.item-box:nth-child(odd) {\r\n  float: left;\r\n}\r\n.item-box:nth-child(even) {\r\n  float: right;\r\n}\r\n@media screen and (min-width: 840px) {\r\n  .item-box{\r\n    position: relative;\r\n    width: 45%;\r\n    margin: 0 10px 20px 10px;\r\n    text-align: center;\r\n    -webkit-box-shadow: 0px 5px 5px rgba(94, 85, 85, 0.384);\r\n            box-shadow: 0px 5px 5px rgba(94, 85, 85, 0.384);\r\n  }\r\n}\r\n@media screen and (max-width: 840px) {\r\n  .item-box{\r\n    position: relative;\r\n    width: 100%;\r\n    margin: 10px 0 10px 0px;\r\n  }\r\n}\r\n.item-fire{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n.project-item{\r\n  position: relative;\r\n  width: 100%;\r\n  height: 140px;\r\n  background-color: #5796a7;\r\n  color: #fff;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;  \r\n  cursor: pointer;\r\n  overflow: hidden;\r\n}\r\n.project-item img{\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n  -webkit-transition: all 0.8s;\r\n  transition: all 0.8s;\r\n}\r\n.project-item img:hover{\r\n  -webkit-transform: scale(1.2);\r\n          transform: scale(1.2);\r\n}\r\n.project-info{\r\n  width: 100%;\r\n  min-height: 50px;\r\n  background-color: #6db6c9;\r\n  color: #fff;\r\n  cursor: pointer;\r\n}\r\n\r\n.show-mask{\r\n  position: fixed;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  background: rgba(0,0,0,.5);\r\n  text-align: center;\r\n  vertical-align: middle;\r\n}\r\n.layer-content {\r\n  position: relative;\r\n  display: table;\r\n  height: 100%;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n}\r\n.layer-box{\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n}\r\n.show-box{\r\n  position: relative;\r\n  display: inline-block;\r\n  background-color: #fff;\r\n  vertical-align: middle;\r\n  padding: 10px 30px 20px 30px;\r\n  border-radius: 8px;\r\n}\r\n.score{\r\n  margin: 0 0 5px 0;\r\n}\r\n.btn-run-box{\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  background: rgba(0, 0, 0, 0.9);\r\n  border-radius: 8px;\r\n  text-align: center;\r\n}\r\n.btn-run-box:before{\r\n  content: '';\r\n  display: inline-block;\r\n  height: 100%;\r\n  vertical-align: middle;\r\n}\r\n.btn-run{\r\n  position: relative;\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  width: 60px;\r\n  height: 60px;\r\n  cursor: pointer;\r\n}\r\n\r\n.showmask-enter {\r\n  opacity: 0.01;\r\n}\r\n\r\n.showmask-enter.showmask-enter-active {\r\n  opacity: 1;\r\n  -webkit-transition: opacity 300ms ease-in;\r\n  transition: opacity 300ms ease-in;\r\n}\r\n\r\n.showmask-leave {\r\n  opacity: 1;\r\n}\r\n\r\n.showmask-leave.showmask-leave-active {\r\n  opacity: 0.01;\r\n  -webkit-transition: opacity 300ms ease-in;\r\n  transition: opacity 300ms ease-in;\r\n}\r\n\r\n.game-tip{\r\n  font-size: 12px;\r\n  color: #112435;\r\n}\r\n\r\n", ""]);
   
   // exports
   
