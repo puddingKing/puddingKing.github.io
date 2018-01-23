@@ -1,5 +1,5 @@
 import React from 'react';
-import RetrosnakeGame from '../components/retrosnake_game'
+import RetrosnakeGame from '../components/retrosnake_game';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 import '../public/css/shows.css'

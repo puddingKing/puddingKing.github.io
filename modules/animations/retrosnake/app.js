@@ -1,7 +1,3 @@
-// var DrawBG = require('./background.js');
-// var Fruit = require("./fruit.js");
-// var Score = require("./score.js");
-// var RetroSnake = require('./retrosnake.js');
 import DrawBG from './background.js';
 import Fruit from './fruit.js';
 import Score from './score.js';
@@ -41,7 +37,8 @@ function gameObj (opts) {
   _this.fire = {
     ended: '',
     goal: '',
-    pause: ''
+    pause: '',
+    playing: ''
   }
 
   document.onkeydown = function (event) {
@@ -66,6 +63,12 @@ function gameObj (opts) {
   }
 }
 
+gameObj.prototype.play = function () { // 触发播放
+  var _this = this;
+  _this.isPause = false;
+  _this.run();
+}
+
 gameObj.prototype.run = function () {
   var _this = this;
   !_this.isPause ? _this.frame() : '';
@@ -82,6 +85,7 @@ gameObj.prototype.frame = function () {
     _this.fruit.update();
     _this.retrosnake.grow();
   }
+  _this.fire.playing()
 }
 
 gameObj.prototype.on = function (type, func) { // 监听游戏状态
@@ -95,6 +99,9 @@ gameObj.prototype.on = function (type, func) { // 监听游戏状态
       break;
     case 'pause': // 暂停：
       _this.fire.pause = typeof func == 'function' ? func : '';
+      break;
+    case 'playing':
+      _this.fire.playing = typeof func == 'function' ? func : '';
       break;
     default:
       break;
