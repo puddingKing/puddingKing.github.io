@@ -18,11 +18,15 @@ WATEROBJ.prototype.update = function (water) {
 }
 
 WATEROBJ.prototype.init = function () {
-  console.log('water.init begin:')
+  data.numerators = [];
+  console.log('water.init begin:' + this.canvas)
   var water = this.canvas
   var ctx = water.getContext('2d')
   var width = this.width
   var height = this.height
+  console.log('water width' + this.width)
+  console.log('water height' + this.height)
+  console.log('data max' + data.max)  
   ctx.clearRect(0, 0, width, height)
   for (var i = 0; i < data.max; i++) {
     var x = Math.random() * width
@@ -150,8 +154,13 @@ WATEROBJ.prototype.lower = function (num, water) {
   data.numerators.splice(0, num)
 }
 
-WATEROBJ.prototype.change = function () {
-  
+WATEROBJ.prototype.clearAll = function () {
+  console.log('clear')
+  var water = this.canvas
+  var width = this.width
+  var height = this.height
+  var ctx = water.getContext('2d')
+  ctx.clearRect(0, 0, width, height)
 }
 
 module.exports = WATEROBJ

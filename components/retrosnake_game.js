@@ -13,15 +13,12 @@ class ShowBox extends React.Component {
 
 	componentDidMount() {
 		var _this = this
-		console.log('did mounted')
-		console.log(document.getElementById('foodfield'))
 		var _game = new Game({
 			el: 'foodfield'
 		})
 		_this.setState({
 			game: _game
 		})
-		// _game.run()
 		
 		_game.on('goal', function (data) {
 			_this.setState({

@@ -19,7 +19,7 @@ var numerators = {
           ctx.save()
           ctx.beginPath()
           ctx.globalAlpha = 0.5*(data.distance - distance) / (data.distance)
-          ctx.strokeStyle = '#fff'
+          ctx.strokeStyle = '#000'
           ctx.moveTo(a.x, a.y)
           ctx.lineTo(b.x, b.y)
           ctx.stroke()
