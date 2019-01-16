@@ -113,15 +113,5 @@ gameObj.prototype.fireended = function () {
   typeof _this.fire.ended == 'function' ? _this.fire.ended() : '';
 }
 
-function hitSelf (retrosnake) {
-  var hitself = false;
-  for (var i = 0; i < retrosnake.body.length; i++) {
-    if (retrosnake.body[i].x == retrosnake.head.x && retrosnake.body[i].y == retrosnake.head.y) {
-      hitself = true;
-    }
-  }
-  return hitself;
-}
-
 // module.exports = gameObj;
 export default gameObj;

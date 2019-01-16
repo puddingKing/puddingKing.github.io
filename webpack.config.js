@@ -1,7 +1,3 @@
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var path = require('path');
-
 module.exports = {
   //页面入口文件配置
   entry: './main.js',
