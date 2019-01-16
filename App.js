@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './public/css/main.css';
-// import { browserHistory } from 'react-router';
 import { createHashHistory } from 'history'
 
 const history = createHashHistory()
-console.log(history.location.pathname)
 
 const links = [{
   id: 1,

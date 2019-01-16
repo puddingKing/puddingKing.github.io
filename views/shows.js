@@ -33,7 +33,8 @@ class Shows extends React.Component {
 		// this.handleClick = this.handleClick.bind(this);
 	}
 	
-	handleClick(project) {
+	handleClick(project, e) {
+		e.stopPropagation();
 		switch (project) {
 			case 'retrosnake':
 				this.setState({isRetrosnakeGame: !this.state.isRetrosnakeGame})
@@ -98,7 +99,6 @@ class Shows extends React.Component {
 						}
 					</ReactCSSTransitionGroup>
 				</div>
-					
 			</div>
 		)
 	}
@@ -113,10 +113,6 @@ function ProjectItem(props) {
 			<div className="project-info">{props.introduce}</div>
 		</div>
 	)
-}
-
-function showProject() {
-	alert(1)
 }
 
 export default Shows;
